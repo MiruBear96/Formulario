@@ -57,6 +57,32 @@
 <script>
     const Server_URL = "https://script.google.com/macros/s/AKfycbwofdbjvAYLrECCxbKesW1woz1jlkOKNRe2YH7DlSvLbw1iREpSg6uNREs2WKpUHLsRbA/exec"
 </script>
+<script>
+    const formData = new FormData(form);
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+    });
+    (function(){
+        emailjs.init("1v5GhIRcouDZrHo1J");
+    })();
+
+    emailjs.send("service_sptw8j8", "template_w5bno89", {
+    name: name,
+    email: email,
+    title: title
+    }).then(function(response) {
+      console.log("Correo enviado con éxito", response.status, response.text);
+      alert("nos contactaremos por mail");
+       form.reset();
+      grecaptcha.reset();
+    }, function(error) {
+    console.error("Error al enviar", error);
+      alert("error al enviar respuesta");
+    });
+</script>
 </html>
 
 
