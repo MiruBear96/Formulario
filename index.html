@@ -52,9 +52,8 @@
     function onSubmit(token) {
         document.getElementById("demo-form").submit();
     }
-</script>
-<script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyS9tWQ7XFSwaGBExbry3VBsR0JsJAPxyeKlYcySD7loalDQIMv3V5S0wY_QofQOmQK/exec"
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyS9tWQ7XFSwaGBExbry3VBsR0JsJAPxyeKlYcySD7loalDQIMv3V5S0wY_QofQOmQK/exec";
 
     const formData = new FormData(form);
 
@@ -63,23 +62,23 @@
         body: formData,
         mode: "no-cors"
     });
-    (function(){
+
+    (function() {
         emailjs.init("1v5GhIRcouDZrHo1J");
     })();
 
     emailjs.send("service_sptw8j8", "template_w5bno89", {
-    name: name,
-    email: email,
-    title: title
+        name: name,
+        email: email,
+        title: title
     }).then(function(response) {
-      console.log("Correo enviado con éxito", response.status, response.text);
-      alert("nos contactaremos por mail");
-       form.reset();
-      grecaptcha.reset();
+        console.log("Correo enviado con éxito", response.status, response.text);
+        alert("nos contactaremos por mail");
+        form.reset();
+        grecaptcha.reset();
     }, function(error) {
-    console.error("Error al enviar", error);
-      alert("error al enviar respuesta");
+        console.error("Error al enviar", error);
+        alert("error al enviar respuesta");
     });
 </script>
 </html>
-
