@@ -1,77 +1,85 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Consulta</title>
+    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        (function(){
-            emailjs.init("1v5GhIRcouDZrHo1J");
-        })();
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"> </script>
+    <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init({
+            publicKey: "1v5GhIRcouDZrHo1J",
+          });
+       })();
     </script>
+    <script src="script.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
         <div class="row">
-            <div class="col-12 bg-success text-center">
-                <h1>Ingrese su consulta</h1>
+            <div class="col-12 bg-success text-center"><h1>ingrese su consulta</h1></div>
             </div>
-        </div>
     </div>
-
-    <form id="consulta-form">
+    </div>
+<form>
         <div class="form-group">
-            <label for="Nombre">Nombre</label>
-            <input type="text" class="form-control" id="Nombre" placeholder="Ingrese Nombre">
-        </div>
-        <div class="form-group">
-            <label for="Apellido">Apellido</label>
-            <input type="text" class="form-control" id="Apellido" placeholder="Ingrese Apellido">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Ingrese Email">
-        </div>
-        <div class="form-group">
-            <label for="topic">Asunto</label>
-            <input type="text" class="form-control" id="topic" placeholder="Asunto">
-        </div>
-        <div class="form-group">
-            <label for="message">Mensaje</label>
-            <textarea class="form-control" id="message" placeholder="Mensaje"></textarea>
-        </div>
-        <button class="g-recaptcha btn btn-primary" data-sitekey="6LcyuPMrAAAAAFEU94roIrba-SHgn4-EQTTgwPox" data-callback="onSubmit" data-action="submit">Enviar</button>
-    </form>
-
-    <script>
-        function onSubmit(token) {
-            const form = document.getElementById("consulta-form");
-            const formData = new FormData(form);
-
-            fetch("https://script.google.com/macros/s/AKfycbyS9tWQ7XFSwaGBExbry3VBsR0JsJAPxyeKlYcySD7loalDQIMv3V5S0wY_QofQOmQK/exec", {
-                method: "POST",
-                body: formData,
-                mode: "no-cors"
-            }).then(() => {
-                emailjs.send("service_sptw8j8", "template_w5bno89", {
-                    name: formData.get("Nombre"),
-                    email: formData.get("exampleInputEmail1"),
-                    title: formData.get("topic")
-                }).then(response => {
-                    alert("Nos contactaremos por mail");
-                    form.reset();
-                    grecaptcha.reset();
-                }).catch(error => {
-                    console.error("Error al enviar", error);
-                    alert("Error al enviar respuesta");
-                });
-            }).catch(error => {
-                console.error("Error en el envío del formulario", error);
-            });
-        }
-    </script>
+        <label for="Nombre">Nombre</label>
+        <input type="name" class="form-control" id="Nombre" aria-describedby="name" placeholder="Ingrese Nombre">
+    </div>
+    <div class="form-group">
+        <label for="Apellido">Apellido</label>
+        <input type="surname" class="form-control" id="Apellido" aria-describedby="surname" placeholder="Ingrese Apellido">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    </div>
+    <div class="form-group">
+        <label for="topic">Asunto</label>
+        <input type="topic" class="form-control" id="topic" placeholder="Asunto">
+    </div>
+    <div class="form-group">
+        <label for="topic">Mensaje</label>
+        <textarea type="message" class="form-control" id="message" placeholder="Mensaje"></textarea>
+    </div>
+    <button class="g-recaptcha" data-sitekey="6LcyuPMrAAAAAFEU94roIrba-SHgn4-EQTTgwPox" data-callback='onSubmit' data-action='submit'>Submit</button>
+    <button type="submit" class="btn btn-primary" onclick="SendMail()">Enviar</button>
+</form>
 </body>
+<script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
+</script>
+<script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbyS9tWQ7XFSwaGBExbry3VBsR0JsJAPxyeKlYcySD7loalDQIMv3V5S0wY_QofQOmQK/exec"
+</script>
+<script>
+    const formData = new FormData(form);
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors"
+    });
+    (function(){
+        emailjs.init("1v5GhIRcouDZrHo1J");
+    })();
+
+    emailjs.send("service_sptw8j8", "template_w5bno89", {
+    name: name,
+    email: email,
+    title: title
+    }).then(function(response) {
+      console.log("Correo enviado con éxito", response.status, response.text);
+      alert("nos contactaremos por mail");
+       form.reset();
+      grecaptcha.reset();
+    }, function(error) {
+    console.error("Error al enviar", error);
+      alert("error al enviar respuesta");
+    });
+</script>
 </html>
